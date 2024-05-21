@@ -6860,6 +6860,10 @@ class MLXIntegrationTests: XCTestCase {
         XCTAssertEqual(
             result.sum().item(Float.self), -4.904330253601074,
             accuracy: -0.0980866050720215)
+        let emb = Embedding(embeddingCount: 32, dimensions: 256)
+        let x = MLXRandom.uniform(0.0 ..< 1.0, [2, 256])
+        let linear = emb.asLinear(x)
+        XCTAssertEqual(linear.shape, [2, 32])
     }
 
     func testInstanceNorm() {

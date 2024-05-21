@@ -31,4 +31,11 @@ open class Embedding: Module, UnaryLayer {
     open func callAsFunction(_ x: MLXArray) -> MLXArray {
         weight[x]
     }
+
+    /// Call the embedding layer as a linear layer.
+    ///
+    /// Use this for example when input embedding and output projection weights are tied.
+    open func asLinear(_ x: MLXArray) -> MLXArray {
+        x.matmul(weight.T)
+    }
 }
